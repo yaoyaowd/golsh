@@ -2,6 +2,7 @@
   <library name="GOPATH &lt;golsh&gt;">
     <CLASSES>
       <root url="file://$USER_HOME$/clroot/go/wish/src/trevi" />
+      <root url="file://$USER_HOME$/clroot/go/wish/src/public" />
       <root url="file://$USER_HOME$/clroot/go/third_party/src/github.com" />
       <root url="file://$USER_HOME$/clroot/go/third_party/src/golang.org" />
       <root url="file://$USER_HOME$/clroot/go/third_party/src/gopkg.in" />
@@ -9,6 +10,7 @@
     </CLASSES>
     <SOURCES>
       <root url="file://$USER_HOME$/clroot/go/wish/src/trevi" />
+      <root url="file://$USER_HOME$/clroot/go/wish/src/public" />
       <root url="file://$USER_HOME$/clroot/go/third_party/src/github.com" />
       <root url="file://$USER_HOME$/clroot/go/third_party/src/golang.org" />
       <root url="file://$USER_HOME$/clroot/go/third_party/src/gopkg.in" />

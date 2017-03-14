@@ -3,41 +3,13 @@ package golsh
 import (
 	"math/rand"
 	"testing"
-	// "fmt"
+	"fmt"
 )
 
-const (
-	TEST_INSTANCES = 10
-	TEST_RESULTS = 100
-	ROWS = 10000
-	VECLEN = 120
-	TABLESIZE = 10
-	KEYSIZE = 10
-	SLOT = 10.0
-)
-
-func Test_NewSimpleLSHFromData(t *testing.T) {
+func Test_Query_FOREST(t *testing.T) {
 	data := NewRandomData(ROWS, VECLEN)
 	params := NewParams(VECLEN, TABLESIZE, KEYSIZE, SLOT)
-	simpleLsh:= NewSimpleLSHFromData(params, data)
-
-	for _, table := range simpleLsh.Tables {
-		if len(table) == 0 {
-			t.Error("new simple lsh from data failed!")
-		}
-	}
-}
-
-func Test_Query(t *testing.T) {
-	data := NewRandomData(ROWS, VECLEN)
-	params := NewParams(VECLEN, TABLESIZE, KEYSIZE, SLOT)
-	simpleLsh:= NewSimpleLSHFromData(params, data)
-
-	for _, table := range simpleLsh.Tables {
-		if len(table) == 0 {
-			t.Error("new simple lsh from data failed!")
-		}
-	}
+	forestLsh := NewForestLSHFromData(params, data)
 
 	idx := rand.Perm(ROWS)[:TEST_INSTANCES]
 	validIdx := rand.Perm(ROWS)[:TEST_RESULTS]
@@ -48,7 +20,7 @@ func Test_Query(t *testing.T) {
 		p := data.Points[id]
 		avgDist := 0.0
 		count := 0
-		simpleLsh.Query(p, TEST_RESULTS, out)
+		forestLsh.Query(p, TEST_RESULTS, out)
 		for {
 			key := <- out
 			if key == -1 {
@@ -70,7 +42,7 @@ func Test_Query(t *testing.T) {
 		if avgDist > validAvgDist {
 			t.Error("neighbbours are further than random")
 		} else {
-			// fmt.Printf("num found %d, avg dist %f, valid dist %f\n", count, avgDist, validAvgDist)
+			fmt.Printf("num found %d, avg dist %f, valid dist %f\n", count, avgDist, validAvgDist)
 		}
 	}
 }
