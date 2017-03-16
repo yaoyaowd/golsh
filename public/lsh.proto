@@ -1,0 +1,25 @@
+// generate gRPC code in Go:
+// protoc -I public public/lsh.proto --go_out=plugins=grpc:public
+
+syntax = "proto3";
+
+package lsh;
+
+message SearchRequest {
+    string cid = 1;
+}
+
+message SearchDoc {
+    string id = 1;
+    float score = 2;
+    string explain = 3;
+}
+
+message SearchResult {
+    repeated SearchDoc docs = 1;
+    int32 hits = 2;
+}
+
+service LSH {
+    rpc Search (SearchRequest) returns (SearchResult) {}
+}
